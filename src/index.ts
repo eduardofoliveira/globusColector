@@ -24,7 +24,7 @@ const syncCarrosGlobus = async () => {
   await axios.post("https://login.teleconsult.com.br/api/inbound/globus/carros", {
     id_empresa: process.env.ID_EMPRESA,
     token: process.env.TOKEN,
-    data: data.rows
+    data: data
   })
 }
 
