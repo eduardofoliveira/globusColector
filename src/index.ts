@@ -21,7 +21,7 @@ const syncCarrosGlobus = async () => {
       PREFIXOVEIC
   `)
 
-  console.log(data)
+  console.log(data[0])
 
   // await axios.post("https://login.teleconsult.com.br/api/inbound/globus/carros", {
   //   id_empresa: process.env.ID_EMPRESA,
