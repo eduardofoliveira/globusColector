@@ -1,9 +1,36 @@
 import "dotenv/config"
+import axios from "axios"
 import { startOfWeek, endOfWeek, subWeeks, addWeeks, format } from 'date-fns'
 
 import DbOracle from "./database/connectionManager.js"
 
-const sincronizar = async () => {
+const syncCarrosGlobus = async () => {
+  const db = DbOracle.getConnection()
+
+  const data = await db.raw(`
+    select
+      codigoveic,
+      CODIGOTPFROTA,
+      placaatualveic,
+      prefixoveic,
+      condicaoveic,
+      CODIGOEMPRESA
+    from
+      FRT_CADVEICULOS
+    order by
+      PREFIXOVEIC
+  `)
+
+  console.log(data)
+
+  // await axios.post("https://login.teleconsult.com.br/api/inbound/globus/carros", {
+  //   id_empresa: process.env.ID_EMPRESA,
+  //   token: process.env.TOKEN,
+  //   data: data.rows
+  // })
+}
+
+const syncViagensGlobus = async () => {
   const inicio = startOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 1 })
   const fim = endOfWeek(addWeeks(new Date(), 0), { weekStartsOn: 1 })
 
@@ -46,4 +73,5 @@ const sincronizar = async () => {
   process.exit(0)
 }
 
-sincronizar()
+syncCarrosGlobus()
+// syncViagensGlobus()
