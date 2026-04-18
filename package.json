@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc"
   },
   "type": "module",
   "keywords": [],
@@ -12,6 +13,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.28.0",
   "dependencies": {
+    "@types/oracledb": "^6.10.3",
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
     "knex": "^3.2.9",

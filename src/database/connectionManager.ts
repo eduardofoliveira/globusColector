@@ -1,6 +1,6 @@
 import knex, { type Knex } from "knex";
 
-const oracledb = require("oracledb");
+import oracledb from 'oracledb'
 oracledb.initOracleClient();
 
 const config = {
@@ -96,7 +96,7 @@ class ConnectionManager {
 		if (
 			ConnectionManager.reconnecting ||
 			ConnectionManager.reconnectAttempts >=
-				ConnectionManager.maxReconnectAttempts
+			ConnectionManager.maxReconnectAttempts
 		) {
 			console.error("Max reconnect attempts reached or already reconnecting.");
 			return;
