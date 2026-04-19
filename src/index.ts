@@ -95,7 +95,8 @@ const syncViagensGlobus = async () => {
         fm.nomefunc f1nome,
         to_char(sr.horasaidagaragem, 'yy-mm-dd hh24:mi:ss' ) dti,
         to_char(sr.horarecolhida, 'yy-mm-dd hh24:mi:ss' ) dtf,
-        cv.CODIGOTPFROTA cdft
+        cv.CODIGOTPFROTA cdft,
+        fm.CODINTFUNC as CODIGO_FUNCIONARIO
       from
         plt_saidarecolhida sr
       join frt_cadveiculos cv
@@ -114,12 +115,14 @@ const syncViagensGlobus = async () => {
         sr.horasaidagaragem
   `)
 
-  console.log(data)
-
-  process.exit(0)
+  await axios.post("https://login.teleconsult.com.br/api/inbound/globus/viagens", {
+    id_empresa: process.env.ID_EMPRESA,
+    token: process.env.TOKEN,
+    data: data
+  })
 }
 
 // syncCarrosGlobus()
 // syncLinhasGlobus()
-syncMotoristasGlobus()
-// syncViagensGlobus()
+// syncMotoristasGlobus()
+syncViagensGlobus()
