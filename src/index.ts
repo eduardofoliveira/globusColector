@@ -28,6 +28,30 @@ const syncCarrosGlobus = async () => {
   })
 }
 
+const syncLinhasGlobus = async () => {
+  const db = DbOracle.getConnection()
+
+  const data = await db.raw(`
+    select
+      CODINTLINHA,
+      CODIGOORGCONC,
+      CODIGOLINHA,
+      NROFICIALLINHA,
+      NOMELINHA,
+      CODIGOEMPRESA
+    from
+      bgm_cadlinhas
+    where
+      CODIGOORGCONC is not null
+  `)
+
+  await axios.post("https://login.teleconsult.com.br/api/inbound/globus/linhas", {
+    id_empresa: process.env.ID_EMPRESA,
+    token: process.env.TOKEN,
+    data: data
+  })
+}
+
 const syncViagensGlobus = async () => {
   const inicio = startOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 1 })
   const fim = endOfWeek(addWeeks(new Date(), 0), { weekStartsOn: 1 })
@@ -71,5 +95,6 @@ const syncViagensGlobus = async () => {
   process.exit(0)
 }
 
-syncCarrosGlobus()
+// syncCarrosGlobus()
+syncLinhasGlobus()
 // syncViagensGlobus()
