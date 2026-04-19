@@ -94,10 +94,11 @@ const syncViagensGlobus = async () => {
         fm.codfunc f1cod,
         fm.apelidofunc f1ap,
         fm.nomefunc f1nome,
-        to_char(sr.horasaidagaragem, 'yy-mm-dd hh24:mi:ss' ) dti,
-        to_char(sr.horarecolhida, 'yy-mm-dd hh24:mi:ss' ) dtf,
+        to_char(sr.horasaidagaragem, 'yyyy-mm-dd hh24:mi:ss' ) dti,
+        to_char(sr.horarecolhida, 'yyyy-mm-dd hh24:mi:ss' ) dtf,
         cv.CODIGOTPFROTA cdft,
-        fm.CODINTFUNC as CODIGO_FUNCIONARIO
+        fm.CODINTFUNC as CODIGO_FUNCIONARIO,
+        codigoorgconc
       from
         plt_saidarecolhida sr
       join frt_cadveiculos cv
