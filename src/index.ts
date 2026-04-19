@@ -90,6 +90,7 @@ const syncViagensGlobus = async () => {
         cv.prefixoveic,
         l.codigolinha,
         l.nomelinha,
+        l.codintlinha,
         fm.codfunc f1cod,
         fm.apelidofunc f1ap,
         fm.nomefunc f1nome,
