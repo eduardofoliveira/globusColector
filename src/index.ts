@@ -1,6 +1,7 @@
 import "dotenv/config"
 import axios from "axios"
 import { startOfWeek, endOfWeek, subWeeks, addWeeks, format } from 'date-fns'
+import { CronJob } from 'cron';
 
 import DbOracle from "./database/connectionManager.js"
 
@@ -124,7 +125,23 @@ const syncViagensGlobus = async () => {
   })
 }
 
-// syncCarrosGlobus()
-// syncLinhasGlobus()
-// syncMotoristasGlobus()
-syncViagensGlobus()
+const executar = async () => {
+  try {
+    await syncCarrosGlobus()
+    await syncLinhasGlobus()
+    await syncMotoristasGlobus()
+    await syncViagensGlobus()
+  } catch (error) {
+    console.error("Erro ao sincronizar dados com a API do Globus:", error)
+  }
+}
+
+const job = new CronJob(
+  '0 0 3 * * *', // cronTime
+  function () {
+    executar()
+  }, // onTick
+  null, // onComplete
+  true, // start
+  'America/Sao_Paulo' // timeZone
+);

@@ -23,6 +23,7 @@
   "dependencies": {
     "@types/oracledb": "^6.10.3",
     "axios": "^1.15.0",
+    "cron": "^4.4.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
     "knex": "^3.2.9",
